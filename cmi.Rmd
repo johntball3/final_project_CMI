@@ -7,8 +7,66 @@ output: html_document
 
 ```{r setup, include=FALSE, warning = FALSE, message = FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(qwraps2)
 library(tidyverse)
+library(kableExtra)
+
 updf <- read_csv("updf.csv")
+#mutate(Q4 = as.integer(Q4))
+#am having trouble with including as because when I do as.integer() it makes all the values NA.
+#making graph of means for 5 axes
+#putting in an image
+
+female <- updf %>%
+  filter(Q5 == 2)
+
+female %>%
+  count(Q4) %>%
+  arrange(desc(n))
+
+  ggplot(aes(x = Q4)) + geom_histogram()
+
+mean_ci(updf$Depression)
+kable()
+
+male %>%
+  count(Q4) %>%
+  arrange(desc(n))
+
+male <- updf %>%
+  filter(Q5 == 1)
+
+hobbyist <- updf %>%
+  filter(Q7 == 1)
+
+pursuit <- updf %>%
+  filter(Q7 == 2)
+
+professional <- updf %>%
+  filter(Q7 == 3)
+
+mixedinc <- updf %>%
+  filter(Q7 == 4)
+  
+updf %>%
+  group_by(Q6, Q7) %>%
+  count() %>%
+  arrange(desc(n))
+  count(Q6)
+
+updf %>%
+  count(Q7)
+
+# Q7 1 is for fun, 2 is for trying to pursue professionally, 3 is make a living,
+# 4 is mixed
+
+updf %>%
+  count(Q8)
+#probably want hobbyists,
+
+
+
 ```
 
 ```{r}
@@ -23,6 +81,8 @@ updf <- read_csv("updf.csv")
 
 ```{r, warning = FALSE, message = FALSE}
 
+# draft for depression
+
 updf %>%
   ggplot(aes(x = Depression)) + 
   geom_histogram(binwidth = 2, color = "black", fill = "light blue") +
@@ -32,6 +92,34 @@ updf %>%
             subtitle = "Comedians Show Massively Increased Depression Scores Relative to General Population, With Control Median Being Less than 10")
 
 
+# draft for big 5
+b5 <- updf %>%
+  select(Q5, Q7, Extraversion, Agreeableness, Conscientiousness, Neuroticism, Imagination) %>%
+  drop_na()
+
+summary(b5)
+
+
+# draft for hypomania
+h <- updf %>%
+  select(Q4, Q5, Q7, Hypomanic) %>%
+  filter(!is.na(Hypomanic))
+
+h %>%
+  mean(Hypomanic)
+
+h %>%
+  sd(Hypomanic)
+
+# draft for alcoholism
+alc <- updf %>%
+  select(Q4, Q5, Q7, Consumption, Dependance, Problems, AUDITtot) %>%
+  filter(!is.na(AUDITtot))
+
+# draft for psychosis
+olife <- updf %>%
+  select(Q4, Q5, Q7, OLA, OCogDis, IntAnh, NonConf, OLifeT) %>%
+  filter(!is.na(OLifeT))
        
 ```
 
@@ -48,6 +136,28 @@ updf %>%
        y = "Enjoyability of Getting a Laugh Scored One Through Ten",
        subtitle = "One would expect enjoyability ratings of an experience to go down as anhedonic depressive symptoms increase. However, as depressive symptoms increase, comedians continue to rate getting a laugh as being 'euphoric'")
 ```
+
+
+
+```{r}
+#hypomanic
+summary(h)
+
+mean(h$Hypomanic)
+sd(h$Hypomanic)
+
+mean(datasetInput()$Hypomanic)
+sd(datasetInput()$Hypomanic)
+
+mean(alc$Consumption)
+mean(datasetInput()$Consumption)
+
+
+summary(alc)
+```
+
+
+
 
 
 ```{r, eval = FALSE, warning = FALSE}
