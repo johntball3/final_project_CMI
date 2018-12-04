@@ -55,7 +55,9 @@ ui <- fluidPage(
         tabsetPanel(type = "tabs",
                     tabPanel("Background", textOutput("bg")),
                     
-                    tabPanel("Big 5 Personality Traits", tableOutput("big5"),
+                    tabPanel("Big 5 Personality Traits", textOutput("big5e"),
+                             textOutput("big5a"), textOutput("big5c"),
+                             textOutput("big5n"), textOutput("big5i"),
                              img(src = 'Big 5.png', align = "right")),
                     
                     tabPanel("Depression", plotOutput("distPlot"),      
@@ -65,10 +67,14 @@ ui <- fluidPage(
                     tabPanel("Hypomania", plotOutput("hPlot"),
                              textOutput("htable")),
                     
-                    tabPanel("Alcoholism", plotOutput("AUDIT")),
+                    tabPanel("Alcoholism", 
+                             textOutput("cons"), textOutput("dep"),
+                             textOutput("probs"), text("AUDITtot")),
                     
-                    tabPanel("Psychosis", tableOutput("table"),
-                             HTML('<center><img src="O-LIFE.png" height = 350 width = 550 ></center>'))
+                    tabPanel("Psychosis", textOutput("IntAn"),
+                             textOutput("UnEx"), textOutput("CogDis"),
+                             textOutput("ImpNon"), textOutput("OLIFEtot"),
+                             img(src = 'O-LIFE.png', align = "right"))
         )
       )
    )
@@ -87,8 +93,7 @@ server <- function(input, output) {
             "Mixed Professional/Unprofessional Income" = mixedinc)
    })
    
-   ##if I do ggplot of multiple datasets, might be easier to just do select
-   
+
    output$distPlot <- renderPlot({
       # generate bins based on input$bins from ui.R
      ggplot(datasetInput(), aes(x = Depression)) + 
@@ -121,14 +126,41 @@ server <- function(input, output) {
    
    #how to filter out NA values in the string?
    
-   output$big5 <- renderTable({
-     mean_sd(datasetInput()$Extraversion)
-     mean_sd(datasetInput()$Agreeableness)
-     mean_sd(datasetInput()$Conscientiousness)
-     mean_sd(datasetInput()$Neuroticism)
-     mean_sd(datasetInput()$Imagination)
+   output$big5e <- renderText({
+     paste0(round(mean(datasetInput()$Extraversion, na.rm = T), digits = 2),
+             " (",
+             round(sd(datasetInput()$Extraversion, na.rm = T), digits = 2),
+             ")")
    })
    
+   
+    output$big5a <- renderText({  
+     paste0(round(mean(datasetInput()$Agreeableness, na.rm = T), digits = 2),
+            " (",
+            round(sd(datasetInput()$Agreeableness, na.rm = T), digits = 2),
+            ")")     
+   })
+    
+    output$big5c <- renderText({  
+      paste0(round(mean(datasetInput()$Conscientiousness, na.rm = T), digits = 2),
+             " (",
+             round(sd(datasetInput()$Conscientiousness, na.rm = T), digits = 2),
+             ")")     
+    })
+    
+    output$big5n <- renderText({  
+      paste0(round(mean(datasetInput()$Neuroticism, na.rm = T), digits = 2),
+             " (",
+             round(sd(datasetInput()$Neuroticism, na.rm = T), digits = 2),
+             ")")     
+    })
+    
+    output$big5i <- renderText({  
+      paste0(round(mean(datasetInput()$Imagination, na.rm = T), digits = 2),
+             " (",
+             round(sd(datasetInput()$Imagination, na.rm = T), digits = 2),
+             ")")     
+    })
 }
 
 # Run the application 
