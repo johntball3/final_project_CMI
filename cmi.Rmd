@@ -18,6 +18,7 @@ updf <- read_csv("updf.csv")
 #  summary()
 #updf %>%
 #  summary()
+#still need to replace values which were unfilled
 ```
 
 ```{r, warning = FALSE, message = FALSE}
