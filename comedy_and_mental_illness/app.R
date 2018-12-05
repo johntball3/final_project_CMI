@@ -41,39 +41,54 @@ ui <- fluidPage(
    sidebarLayout(
       sidebarPanel(
          selectInput("groups", "Comedian Demographics",
-                     choices = c("Men", "Women", "Hobbyists", "Professionals", "Amateur Pursuing Professional Career", "Mixed Professional/Unprofessional Income"))
-      ),
+                     choices = c("Men", "Women", "Hobbyists", 
+                                 "Professionals", 
+                                 "Amateurs Pursuing Professional Career", 
+                                 "Mixed Professional/Unprofessional Income")),
+         h5("The above menu allows you to select between male comics, female comics, 
+           and comedians at varying professional levels."),
+         p("'Hobbyists' refers to comedians who do not intend to become professionals."),
+         p("'Professionals' refers to comedians who receive the entirety of their income from performing comedy."),
+         p("'Amateurs Pursuing Professional Career' refers to comedians who do not currently make money from comedy but are attempting to do so."),
+         p("'Mixed Professional/Unprofessional Income' refers to comedians who make some of their income from performing comedy but make the rest of their income from other sources.")
+       ),
+      
       
       # Show a plot of the generated distribution
       mainPanel(
         tabsetPanel(type = "tabs",
-                    tabPanel("Background", textOutput("bg")),
+                    tabPanel("Background and Major Findings", plotOutput("joyPlot")),
                     
                     tabPanel("Big 5 Personality Traits", 
-                             h5("Formatted as 'mean(sd)':"),
+                             h5("Subcategories as 'mean(sd)':"),
                              textOutput("big5e"),
                              textOutput("big5a"), textOutput("big5c"),
                              textOutput("big5n"), textOutput("big5i"),
-                             img(src = 'Big 5.png', align = "right")),
+                             br(),
+                             h5("Control Data for Comparison:"),
+                             img(src = 'Big 5.png', width = 380, height = 100, align = "center")),
                     
-                    tabPanel("Depression", plotOutput("distPlot"),      
-                             img(src = '1471-244X-1-3-2.jpg', align = "center"),
-                             plotOutput("joyPlot")),
+                    tabPanel("Depression", h5("CES-D score as 'mean(sd)'"),
+                             plotOutput("distPlot"),      
+                             img(src = '1471-244X-1-3-2.jpg', align = "center")),
                     
-                    tabPanel("Hypomania", plotOutput("hPlot"),
+                    tabPanel("Hypomania", 
+                             plotOutput("hPlot"),
                              textOutput("htable")),
                     
                     tabPanel("Alcoholism", 
-                             h5("Formatted as 'mean(sd)':"),
+                             h5("Subcategories as 'mean(sd)':"),
                              textOutput("cons"), textOutput("dep"),
                              textOutput("probs"), textOutput("AUDITtot")),
                     
                     tabPanel("Psychosis", 
-                             h5("Formatted as 'mean(sd)':"),
+                             h5("Subcategories as 'mean(sd)':"),
                              textOutput("UnEx"),
                              textOutput("CogDis"), textOutput("IntAn"), 
                              textOutput("ImpNon"), textOutput("OLIFEtot"),
-                             img(src = 'O-LIFE.png', align = "right"))
+                             br(),
+                             h5("Control Data for Comparison:"),
+                             img(src = 'O-LIFE.png', width = 320, height = 115, align = "center"))
         )
       )
    )
