@@ -6,17 +6,6 @@ that there is a positive relationship between comedy and mental illness.
 This data was presented in 2018 at the Harvard Global Mental Health Conference, and the trailer for the presentation can be found here: https://www.youtube.com/watch?v=bHvKoFaCtho
 And the full video presentation shown at the conference can be found here: https://www.youtube.com/watch?v=F-PyxnnzUhs&t=8s.
 
-Go to any comedy open-mic or Netflix special, and approximately one-quarter of comedians will tell jokes 
-about suicide attempts, substance abuse, depression, alcoholism, manic episodes, 
-and unresolved trauma.
-While the connection seems like a no-brainer to many individuals in the comedy industry, 
-whether there is a genuine connection between comedy and mental illness, or it is manufactured as a part of performativity
-is somewhat controversial. In some respects, comedians get paid to talk about their trauma; and 
-in the words of one participant, "there are just as many depressed electricians as there are comedians; 
-it's just that no one cares about electricians." 
-
-Regardless, is the "sad-clown" phenomenon just a stereotype, projected onto the industry by media headlines about the next celebrity death by suicide or rehab enrollment, or could it be a real correlation? And if there is a relationship, is it that the stress of the comedy industry is "making" people depressed or that mentally ill people are more likely to go into it?
-
 Up until this point, few studies have looked at cognitive aspects of comedians. None have looked at rates of depression, alcoholism, or bipolar disorder. And more importantly, none of these studies have explored why the correlation between comedy and mental illness could exist. 
 This study analyses the rates of mental illness among comedians and explores potential mechanisms for why mental illness
 could be more prevalent among this population.
