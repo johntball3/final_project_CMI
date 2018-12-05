@@ -107,7 +107,7 @@ ui <- fluidPage(
                              br(),
                              h5("Control Data for Comparison:"),
                              
-            #Changed image dimensions.                             
+  #Changed image dimensions.                             
                              img(src = 'Big 5.png', width = 380, height = 90, align = "center")),
                     
                     tabPanel("Depression", 
@@ -133,6 +133,7 @@ ui <- fluidPage(
                                From this data, it could be the case that hypomania improves one's capacity for comedy
                                performance.")),
                     
+# For longer panels could make the side panel slide with scrolling.
                     tabPanel("Alcoholism", 
                              h4("Alcoholism"),
                              p("For the purposes of this study, 'alcoholism' is defined as an addiction to the consumption of alcoholic liquor or the mental illness and compulsive behavior resulting from alcohol dependency. 
@@ -149,6 +150,7 @@ ui <- fluidPage(
                              h6("Histogram of Alcohol-Related Problems for Comedians", align = "center"),
                              plotOutput("problemo"), textOutput("alcap")),
                     
+# Decided to have definitions for more obscure psychology terms at top, figures below.
                     tabPanel("Schizotypy", 
                              br(),
                              h4("Schizotypy"),
@@ -197,6 +199,7 @@ server <- function(input, output) {
    })
    
 
+# This code chunk was basic model for all histograms.
    output$distPlot <- renderPlot({
       # generate bins based on input$bins from ui.R
      ggplot(datasetInput(), aes(x = Depression)) + 
@@ -215,14 +218,15 @@ server <- function(input, output) {
        geom_point()
    })
    
+# Hypomanic scale.
    output$hPlot <- renderPlot({
-     # generate bins based on input$bins from ui.R
      datasetInput() %>%
        filter(Q17 < 4) %>%
        ggplot(aes(x = Hypomanic)) + 
        geom_histogram(binwidth = 1, color = "black", fill = "light blue") 
    })
    
+# Two alcohol histograms.
    output$depd <- renderPlot({
      # generate bins based on input$bins from ui.R
      datasetInput() %>%
@@ -237,6 +241,7 @@ server <- function(input, output) {
        geom_histogram(binwidth = 1, color = "black", fill = "light blue") 
    })
    
+# Analysis for dependance and problems.
    output$alcad <- renderText({
      paste0("A value of 4 or greater in this histogram indicates some level of alcohol dependance. 
             In this sample, there were ", round(count(subset(datasetInput(), Dependance >= 4)), digits = 2),
