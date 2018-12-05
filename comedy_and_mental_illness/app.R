@@ -57,7 +57,8 @@ ui <- fluidPage(
        ),
       
       
-      # Show a plot of the generated distribution
+# Background and Research analysis tab.
+
       mainPanel(
         tabsetPanel(type = "tabs",
                     tabPanel("Background and Major Findings", 
