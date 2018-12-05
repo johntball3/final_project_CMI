@@ -68,9 +68,9 @@ ui <- fluidPage(
                              h5("Control Data for Comparison:"),
                              img(src = 'Big 5.png', width = 380, height = 100, align = "center")),
                     
-                    tabPanel("Depression", h5("CES-D score as 'mean(sd)'"),
+                    tabPanel("Depression", h4("CES-D Histogram for Comedians", align = "center"),
                              plotOutput("distPlot"),      
-                             img(src = '1471-244X-1-3-2.jpg', align = "center")),
+                             img(src = '1471-244X-1-3-2.jpg', width = 600, height = 400, align = "center")),
                     
                     tabPanel("Hypomania", 
                              plotOutput("hPlot"),
@@ -103,7 +103,7 @@ server <- function(input, output) {
             "Women" = female,
             "Hobbyists" = hobbyist,
             "Professionals" = professional,
-            "Amateur Pursuing Professional Career" = pursuit,
+            "Amateurs Pursuing Professional Career" = pursuit,
             "Mixed Professional/Unprofessional Income" = mixedinc)
    })
    
@@ -128,14 +128,14 @@ server <- function(input, output) {
      datasetInput() %>%
        filter(Q17 < 4) %>%
        ggplot(aes(x = Hypomanic)) + 
-       geom_histogram(binwidth = 1, color = "black", fill = "light blue")
+       geom_histogram(binwidth = 1, color = "black", fill = "light blue") 
    })
    
    output$htable <- renderText({
-       paste0(round(mean(datasetInput()$Hypomanic, na.rm = T), digits = 2),
-              " (", 
+       paste0("The mean hypomanic inventory score for this group was ", round(mean(datasetInput()$Hypomanic, na.rm = T), digits = 2),
+              " (sd = ", 
               round(sd(datasetInput()$Hypomanic, na.rm = T), digits = 2),
-              ")")
+              "), compared to the control population mean of 8.2 (sd = 4.3).")
    })
    
    output$big5e <- renderText({
