@@ -3,6 +3,9 @@
 From towering figures like Robin Williams, Steve Martin, and Richard Pryor, people often assume 
 that there is a positive relationship between comedy and mental illness. 
 
+This data was presented in 2018 at the Harvard Global Mental Health Conference, and the trailer for the presentation can be found here: https://www.youtube.com/watch?v=bHvKoFaCtho
+And the full video presentation shown at the conference can be found here: https://www.youtube.com/watch?v=F-PyxnnzUhs&t=8s.
+
 Go to any comedy open-mic or Netflix special, and approximately one-quarter of comedians will tell jokes 
 about suicide attempts, substance abuse, depression, alcoholism, manic episodes, 
 and unresolved trauma.
