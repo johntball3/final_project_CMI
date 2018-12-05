@@ -3,12 +3,12 @@
 From towering figures like Robin Williams, Steve Martin, and Richard Pryor, people often assume 
 that there is a positive relationship between comedy and mental illness. 
 
-This data was presented in 2018 at the Harvard Global Mental Health Conference, and the trailer for the presentation can be found here: https://www.youtube.com/watch?v=bHvKoFaCtho
-And the full video presentation shown at the conference can be found here: https://www.youtube.com/watch?v=F-PyxnnzUhs&t=8s.
-
 Up until this point, few studies have looked at cognitive aspects of comedians. None have looked at rates of depression, alcoholism, or bipolar disorder. And more importantly, none of these studies have explored why the correlation between comedy and mental illness could exist. 
 This study analyses the rates of mental illness among comedians and explores potential mechanisms for why mental illness
 could be more prevalent among this population.
+
+This data was presented in 2018 at the Harvard Global Mental Health Conference, and the trailer for the presentation can be found here: https://www.youtube.com/watch?v=bHvKoFaCtho
+And the full video presentation shown at the conference can be found here: https://www.youtube.com/watch?v=F-PyxnnzUhs&t=8s.
 
 ## Methods and Procedure
 We distributed an online survery via the following qualtrics link: https://harvard.az1.qualtrics.com/jfe/form/SV_2bjnjwogAVzzQ3z
