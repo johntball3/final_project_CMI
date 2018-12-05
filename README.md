@@ -32,3 +32,8 @@ professional careers, and 33 receiving a mix of income for comedy performance an
 
 Participants were recruited via college comedy groups, professional comedy club comedian databases, and online comedy 
 Facebook groups. 
+
+#Conclusions and Analysis
+
+able to directly counter the effects of depressive anhedonia.
+counter meaninglessness. 
