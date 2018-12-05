@@ -39,4 +39,4 @@ It is a known scientific fact that mental illness is more prevalent among creati
 
 As far as why this relationship could exist, art in many ways serves to regulate the symptoms of mental illness. 
 While it could be the case that the comedy industry exposes comedians to high levels of stress, given that amateurs experienced mental illness at a rate very similar to that of professionals, it is unlikely that comedy "makes" people depressed. More importantly, it appears that there is a selection bias towards mentally ill individuals in the comedy industry, given that comedy functions as a coping mechanism for mental illness. According to the self-rated "Joy" plot, it appears that even among individuals who scored above 40 on the CES-D inventory, the rush of comedy performance is
-able to directly counter the effects of depressive anhedonia.
+able to directly counter the effects of depressive anhedonia. Furthermore, 62% said that comedy served as a coping mechanism for life events. Therefore, it is clear that a large proportion of comedians use comedy - aware of it or not - to directly counter the symptoms of mental illness.
