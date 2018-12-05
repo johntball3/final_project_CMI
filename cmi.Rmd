@@ -120,6 +120,35 @@ alc <- updf %>%
 olife <- updf %>%
   select(Q4, Q5, Q7, OLA, OCogDis, IntAnh, NonConf, OLifeT) %>%
   filter(!is.na(OLifeT))
+
+updf %>%
+  filter(Dependance >= 4) %>%
+  count()
+
+updf %>%
+  filter(Dependance < 4) %>%
+  count()
+
+updf %>%
+  filter(Problems > 0) %>%
+  count()
+
+updf %>%
+  filter(Problems == 0) %>%
+  count()
+
+updf %>%
+  count(Q7)
+
+count(subset(datasetInput(), Dependance >= 4))
+count(subset(datasetInput(), Dependance < 4))
+
+count(subset(datasetInput(), Problems > 0))
+count(subset(datasetInput(), Problems == 0))
+
+
+  updf %>%
+    count(Q15)
        
 ```
 
