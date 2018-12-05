@@ -19,6 +19,8 @@ This study analyses the rates of mental illness among comedians and explores pot
 could be more prevalent among this population.
 
 ## Methods and Procedure
+We distributed an online survery via the following qualtrics link: https://harvard.az1.qualtrics.com/jfe/form/SV_2bjnjwogAVzzQ3z
+
 This study administered several mental health questionnaires to comedians, including the:
 Mini-IPIP (a Big Five Personality Measure), 
 the Hypomanic Personality Scale - Short Form, 
