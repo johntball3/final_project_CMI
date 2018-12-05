@@ -5,7 +5,7 @@ that there is a positive relationship
 between comedy and mental illness. 
 
 Go to any comedy open-mic or Netflix special, and approximately one-quarter of comedians will tell jokes 
-about suicide attempts, substance abuse, depression, alcoholism, manic episodes, problematic therapists,
+about suicide attempts, substance abuse, depression, alcoholism, manic episodes, 
 and unresolved trauma.
 While the connection seems like a no-brainer to many individuals in the comedy industry, 
 whether there is a genuine connection between comedy and mental illness, or it is manufactured as a part of performativity
