@@ -6,7 +6,14 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE, warning = FALSE, message = FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+## This rmd file was used to draft model formats for graphs and descriptive
+## statistics for each mental health questionnaire. Only drafted depression and
+## hypomania histograms, then moved over to creating all histograms in shiny app. Did the
+## same for mean and standard deviation. Also commented interactive model code
+## for alcoholism analysis.
+
 
 # Loaded in necessary libraries.
 library(dplyr)
@@ -44,11 +51,8 @@ updf %>%
 #correlate with alcoholism scores
 
 
-
-updf %>%
-  filter(Q19 == 2) %>%
-  filter(!is.na(Depression)) %>%
-  summarize(mean(Depression), sd(Depression)) 
+# If we look at this graph of depression versus alcohol consumption, we don't see much of a correlation. This could be because a large number of comedians have decided to go sober.
+ggplot(updf, aes(x = Depression, y = Consumption)) + geom_point()
 
 
 # From these statistics we can see that the comedy environment can enable alcoholism.
@@ -62,15 +66,18 @@ updf %>%
 # Depression Histogram
 ```{r}
 # Model histogram for depression, when in shiny app will replace "updf" with
-# reactive dataframe.
+# reactive dataframe. Used this histogram structure for all other mental illness scales, 
+# just replaced 'Depression' with relevant variable name.
 ggplot(updf, aes(x = Depression)) + 
        geom_histogram(binwidth = 2, color = "black", fill = "light blue")
 
-# Model descriptive statistics for Depression
+# Model descriptive statistics for Depression. Used this for each questionnaire dataset.
 updf %>%
   filter(!is.na(Depression)) %>%
   summarize(mean(Depression), sd(Depression))
 ```
+#####For context, the bell curve for average depression inventory scores in control populations can be found here https://www.ncbi.nlm.nih.gov/pmc/articles/PMC34551/figure/F2/
+
 
 # Hypomania Histogram
 ```{r}
@@ -87,68 +94,35 @@ updf %>%
 
 
 ```{r}
-#new %>%
-#  summary()
-#cmi %>%
-#  summary()
-#updf %>%
-#  summary()
-#still need to replace values which were unfilled
 
-glimpse(updf)
-zit <- updf
-
-# Some people think depression is only prevalent among professionals, but it's clear this exists among amateurs as well. Does nto correlate with age.
+# Some people think depression is only prevalent among professionals, but it's clear this exists among amateurs as well. Does not correlate with age.
 ggplot(updf, aes(x = Q4, y = Depression)) + geom_point() +
-  geom_smooth()
+  geom_smooth() + 
+  ggtitle("Depression With Age")
 
-ggplot(updf, aes(x = Q4, y = Consumption)) + geom_point() +
-  geom_smooth()
-
-glimpse(updf)
 ```
 
+```{r}
+# dataset for psychosis
+olife <- updf %>%
+  select(Q4, Q5, Q7, OLA, OCogDis, IntAnh, NonConf, OLifeT) %>%
+  filter(!is.na(OLifeT))
+
+```
+
+
+
+#Alcoholism
 ```{r, warning = FALSE, message = FALSE}
 
-# draft for depression
-
-updf %>%
-  ggplot(aes(x = Depression)) + 
-  geom_histogram(binwidth = 2, color = "black", fill = "light blue") +
-  labs(title = "Histogram of Depression Inventory Scores Among Comedians",
-       x = "Depression Inventory Score",
-       y = "Number of Comedians",
-            subtitle = "Comedians Show Massively Increased Depression Scores Relative to General Population, With Control Median Being Less than 10")
 
 
-# draft for big 5
-b5 <- updf %>%
-  select(Q5, Q7, Extraversion, Agreeableness, Conscientiousness, Neuroticism, Imagination) %>%
-  drop_na()
-
-summary(b5)
-
-
-# draft for hypomania
-h <- updf %>%
-  select(Q4, Q5, Q7, Hypomanic) %>%
-  filter(!is.na(Hypomanic))
-
-h %>%
-  mean(Hypomanic)
-
-h %>%
-  sd(Hypomanic)
-
-# draft for alcoholism
+# dataset for alcoholism
 alc <- updf %>%
   select(Q4, Q5, Q7, Consumption, Dependance, Problems, AUDITtot) %>%
   filter(!is.na(AUDITtot))
 
-# draft for psychosis
-olife <- updf %>%
-  select(Q4, Q5, Q7, OLA, OCogDis, IntAnh, NonConf, OLifeT) %>%
-  filter(!is.na(OLifeT))
+
 
 updf %>%
   filter(Dependance >= 4) %>%
@@ -169,19 +143,14 @@ updf %>%
 updf %>%
   count(Q7)
 
-count(subset(datasetInput(), Dependance >= 4))
-count(subset(datasetInput(), Dependance < 4))
+#count(subset(datasetInput(), Dependance >= 4))
+#count(subset(datasetInput(), Dependance < 4))
 
-count(subset(datasetInput(), Problems > 0))
-count(subset(datasetInput(), Problems == 0))
+#count(subset(datasetInput(), Problems > 0))
+#count(subset(datasetInput(), Problems == 0))
 
-
-  updf %>%
-    count(Q15)
-       
 ```
 
-#####For context, the bell curve for average depression inventory scores in control populations can be found here https://www.ncbi.nlm.nih.gov/pmc/articles/PMC34551/figure/F2/
 
 ```{r, warning = FALSE, message = FALSE}
 #enjoyability of getting a laugh vs depression inventory scores among performers.
@@ -197,72 +166,5 @@ updf %>%
 
 
 
-```{r}
-#hypomanic
-summary(h)
 
-mean(h$Hypomanic)
-sd(h$Hypomanic)
-
-mean(datasetInput()$Hypomanic)
-sd(datasetInput()$Hypomanic)
-
-mean(alc$Consumption)
-mean(datasetInput()$Consumption)
-
-
-summary(alc)
-```
-
-
-
-
-
-```{r, eval = FALSE, warning = FALSE}
-#student
-cmi %>%
-  filter(Q17 < 4) %>%
-  filter(Q6 == 1) %>% 
-  filter(!is.na(Depression)) %>%
-  ggplot(aes(x = Depression)) + geom_histogram()
-
-
-
-#depression mean score among people who had a "moment"
-cmi %>%
-  filter(Q17 < 4) %>%
-  filter(Q20 == 1) %>% 
-  filter(!is.na(Depression)) %>%
-  summarize(mean_d = mean(Depression))
-
-
-# effect of comedy on people who do have depression.
-cmi %>%
-  filter(Depression > 20) %>%
-  group_by(Q15) %>%
-  count()
-  
-# effect of comedy on people who do not have depression.
-cmi %>%
-  filter(Depression < 20) %>%
-  group_by(Q15) %>%
-  count()
-
-
-# have you ever been diagnosed with depression?, 1 is yes 2 is no
-cmi%>%
-  filter(Q112 == 2) %>%
-#  filter(Depression > 20) %>%
-  ggplot(aes(x = Depression)) + geom_histogram()
-  
-updf %>%
-  
-  
-# number of people diagnosed with depression. 
-  cmi %>%
-  filter(Q113_1 == 1) %>%
-  count()
-
-  ggplot(aes(x = Depression)) + geom_histogram()
-```
 
