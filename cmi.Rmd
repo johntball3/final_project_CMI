@@ -7,36 +7,23 @@ output: html_document
 
 ```{r setup, include=FALSE, warning = FALSE, message = FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+
+# Loaded in necessary libraries.
 library(dplyr)
-library(qwraps2)
 library(tidyverse)
-library(kableExtra)
 
-updf <- read_csv("updf.csv")
-#mutate(Q4 = as.integer(Q4))
-#am having trouble with including as because when I do as.integer() it makes all the values NA.
-#making graph of means for 5 axes
-#putting in an image
+# Read in df. Had to convert age from character to numeric.
+updf <- read_csv("updf.csv") %>%
+    mutate(Q4 = as.numeric(Q4))
 
+# male and female datasets. 
 female <- updf %>%
   filter(Q5 == 2)
-
-female %>%
-  count(Q4) %>%
-  arrange(desc(n))
-
-  ggplot(aes(x = Q4)) + geom_histogram()
-
-mean_ci(updf$Depression)
-kable()
-
-male %>%
-  count(Q4) %>%
-  arrange(desc(n))
 
 male <- updf %>%
   filter(Q5 == 1)
 
+# 4 datasets based on career income from comedy.
 hobbyist <- updf %>%
   filter(Q7 == 1)
 
@@ -48,26 +35,56 @@ professional <- updf %>%
 
 mixedinc <- updf %>%
   filter(Q7 == 4)
-  
-updf %>%
-  group_by(Q6, Q7) %>%
-  count() %>%
-  arrange(desc(n))
-  count(Q6)
 
 updf %>%
-  count(Q7)
+  filter(Q14_1 == 1) %>%
+  filter(Q14_2 == 1) %>%
+  filter(!is.na(Depression)) %>%
+  summarize(mean(Depression))
+#correlate with alcoholism scores
 
-# Q7 1 is for fun, 2 is for trying to pursue professionally, 3 is make a living,
-# 4 is mixed
+
 
 updf %>%
-  count(Q8)
-#probably want hobbyists,
+  filter(Q19 == 2) %>%
+  filter(!is.na(Depression)) %>%
+  summarize(mean(Depression), sd(Depression)) 
 
 
-
+# From these statistics we can see that the comedy environment can enable alcoholism.
+updf %>%
+  filter(Q19 == 1) %>%
+#  filter(!is.na(Problems)) %>%
+  ggplot(aes(x = Problems)) + geom_histogram()
 ```
+
+
+# Depression Histogram
+```{r}
+# Model histogram for depression, when in shiny app will replace "updf" with
+# reactive dataframe.
+ggplot(updf, aes(x = Depression)) + 
+       geom_histogram(binwidth = 2, color = "black", fill = "light blue")
+
+# Model descriptive statistics for Depression
+updf %>%
+  filter(!is.na(Depression)) %>%
+  summarize(mean(Depression), sd(Depression))
+```
+
+# Hypomania Histogram
+```{r}
+# Model histogram for hypomania, when in shiny app will replace updf with
+# reactive dataframe.
+ggplot(updf, aes(x = Depression)) + 
+       geom_histogram(binwidth = 2, color = "black", fill = "light blue")
+
+updf %>%
+  filter(!is.na(Hypomanic)) %>%
+  summarize(mean(Hypomanic), sd(Hypomanic))
+```
+
+
 
 ```{r}
 #new %>%
@@ -77,6 +94,18 @@ updf %>%
 #updf %>%
 #  summary()
 #still need to replace values which were unfilled
+
+glimpse(updf)
+zit <- updf
+
+# Some people think depression is only prevalent among professionals, but it's clear this exists among amateurs as well. Does nto correlate with age.
+ggplot(updf, aes(x = Q4, y = Depression)) + geom_point() +
+  geom_smooth()
+
+ggplot(updf, aes(x = Q4, y = Consumption)) + geom_point() +
+  geom_smooth()
+
+glimpse(updf)
 ```
 
 ```{r, warning = FALSE, message = FALSE}
