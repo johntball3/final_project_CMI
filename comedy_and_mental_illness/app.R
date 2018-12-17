@@ -87,7 +87,7 @@ ui <- fluidPage(
                     
 # For greater ease in formatting, decided to display summary statistics for each
 # sub-category as a text output as opposed to in a table. For the control data,
-# I just put in an image from the control validation study summary statistics
+# just used table images from the control validation study summary statistics
 # data.
 
                     tabPanel("Big 5 Personality Traits", 
@@ -133,7 +133,7 @@ ui <- fluidPage(
                                From this data, it could be the case that hypomania improves one's capacity for comedy
                                performance.")),
                     
-# For longer panels could make the side panel slide with scrolling.
+
                     tabPanel("Alcoholism", 
                              h4("Alcoholism"),
                              p("For the purposes of this study, 'alcoholism' is defined as an addiction to the consumption of alcoholic liquor or the mental illness and compulsive behavior resulting from alcohol dependency. 
@@ -141,9 +141,26 @@ ui <- fluidPage(
                                Dependance refers to whether someone is inable to go without consuming
                                alocohol in a given week or else they would experience withdrawal.
                                Problems refers to alcohol-related issues such as violence or an inability to execute normal responsibilities."),
+                             p(""),
+                             br(),
                              h5("Subcategories as 'mean(sd)':"),
                              textOutput("cons"), textOutput("dep"),
                              textOutput("probs"), textOutput("AUDITtot"), br(),
+                             h5("Control Data for Men:"), 
+                             p("Consumption Score: 3.58 (2.36)"), 
+                               p("Problems Score: 1.37 (2.85)"),
+                               p("Total Score: 4.82 (4.78)"), br(),
+                             h5("Control Data for Women:"),
+                             p("Consumption Score: 2.42 (1.72)"),
+                               p("Problems Score: 0.61 (1.90)"),
+                               p("Total score for women: 3.18 (2.97)"),
+                             br(),
+                             h6("Histogram of AUDIT Total Scores for Comedians"),
+                             plotOutput("atot"), 
+                             p("In control populations, a cut-off score indicating high risk for alcoholism among men was an AUDIT total score
+                               of 8. Among women, the cut-off score was 6. In control populations, 20% of 
+                               men and women scored at or above their respective cut-offs. However, among comedians, 40%  
+                               scored above theirs."),
                              h6("Histogram of Alcohol Dependance Values for Comedians", align = "center"), 
                              plotOutput("depd"), textOutput("alcad"),
                              br(), 
@@ -151,6 +168,7 @@ ui <- fluidPage(
                              plotOutput("problemo"), textOutput("alcap")),
                     
 # Decided to have definitions for more obscure psychology terms at top, figures below.
+
                     tabPanel("Schizotypy", 
                              br(),
                              h4("Schizotypy"),
@@ -208,10 +226,10 @@ server <- function(input, output) {
   
    
    output$joyPlot <- renderPlot({
-     # generate bins based on input$bins from ui.R
-     datasetInput() %>%
 
-# Filtered out comedians who said they did not enjoy performing.
+       datasetInput() %>%
+
+# Filtered out comedians who said they did not enjoy performing, only wrote comedy.
        filter(Q17 < 4) %>%
        
      ggplot(aes(x = Depression, y = Q16_1)) + 
@@ -227,6 +245,14 @@ server <- function(input, output) {
    })
    
 # Two alcohol histograms.
+   
+   output$atot <- renderPlot({
+     # generate bins based on input$bins from ui.R
+     datasetInput() %>%
+       ggplot(aes(x = AUDITtot)) + 
+       geom_histogram(binwidth = 1, color = "black", fill = "light blue") 
+   })
+   
    output$depd <- renderPlot({
      # generate bins based on input$bins from ui.R
      datasetInput() %>%
@@ -247,7 +273,7 @@ server <- function(input, output) {
             In this sample, there were ", round(count(subset(datasetInput(), Dependance >= 4)), digits = 2),
             " comedians greater than or equal to 4, and ", 
             round(count(subset(datasetInput(), Dependance < 4)), digits = 2),
-            " comedians below this threshold. Unfortunately, there is not control population data on this metric for comparison.")
+            " comedians below this threshold.")
    })
    
    output$alcap <- renderText({
@@ -255,8 +281,7 @@ server <- function(input, output) {
             In this sample, there were ", round(count(subset(datasetInput(), Problems > 0)), digits = 2),
             " comedians over 0, and ", 
             round(count(subset(datasetInput(), Problems == 0)), digits = 2),
-            " comedians below this threshold. Unfortunately, there is not control population data on this metric for comparison.
-            However, it is extremely striking that among all demographics, a majority of comedians
+            " comedians below this threshold. It is extremely striking that among all demographics, a majority of comedians
             experience some alcohol-related problems. This proportion increases among professionals,
             suggesting alcohol-related problems increase with someone's professional involvement
             in the industry.")
